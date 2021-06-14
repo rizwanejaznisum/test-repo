@@ -39,8 +39,6 @@ jobs:
       - name: Run Cmd
         id: runCmd
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - run: |
           git fetch
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`

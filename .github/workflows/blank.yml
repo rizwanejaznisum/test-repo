@@ -46,7 +46,7 @@ jobs:
           result=`git log $tag1..$tag2 --reverse --merges`
           #echo $result
           commit=`echo $result | grep 'Merge:'`
-          commit=`echo awk '{for (I=1;I<NF;I++) if ($I == "Merge:") print $(I+2)}' << $result`
+          commit=`awk -F '${Merge}' '{print $2}' file | awk '{print $2}'`
           arr=($commit)
           echo ${arr[@]}
           #echo "::set-output name=cmdResult::$result"

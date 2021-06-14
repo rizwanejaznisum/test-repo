@@ -46,9 +46,9 @@ jobs:
           result=`git log $tag1..$tag2 --reverse --merges`
           #echo $result
           commit=`echo $result | grep 'Merge:'`
-          awk '{for (I=1;I<NF;I++) if ($I == "Merge:") print $(I+2)}' << $result
-          arr=($commit)
-          #echo ${arr[@]}
+          arr=(awk '{for (I=1;I<NF;I++) if ($I == "Merge:") print $(I+2)}' << $result)
+          #arr=($commit)
+          echo ${arr[@]}
           #echo "::set-output name=cmdResult::$result"
           msg=`echo $result | grep -A 1 'Date:'`
           #echo "::set-output name=cmdResult::$result"

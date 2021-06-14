@@ -43,7 +43,7 @@ jobs:
           git fetch
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
-          result=`git log $tag1..$tag2 --reverse --merges 
+          result=git log $tag1..$tag2 --reverse --merges 
           echo "::set-output name=cmdResult::$result"
           
       - name: Show Result

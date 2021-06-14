@@ -48,6 +48,7 @@ jobs:
          
           arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'`)
           echo ${arr[@]}
+          for i in "${arr[@]}" do: echo '{"sha": $i}' done
           echo "::set-output name=cmdOutput::$arr"
           #echo $commmits
           #sed 's/^.*Date //; s/commit.*$//' << $result

@@ -45,7 +45,7 @@ jobs:
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log $tag1..$tag2 --reverse --merges | grep 'Merge'`
           echo $result
-          result=`echo grep $result | awk '{print $2}'`
+          result=`echo $result | grep 'Merge' | awk '{print $2}'`
           #echo "::set-output name=cmdResult::$result"
           echo $result
           

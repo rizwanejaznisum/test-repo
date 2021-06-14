@@ -45,10 +45,8 @@ jobs:
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log $tag2..$tag1 --reverse --merges`
-          myarray=(`echo $result | tr ' ' ','`)
-          myarray=(`echo $result | tr 'Date:' ' '`)
-          echo ${myarray[@]}
-          echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'
+         
+          commits=`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'`
           #sed 's/^.*Date //; s/commit.*$//' << $result
           #commit=`echo $result | sed 's/.*Merge: //' | cut -d " " -f 2`
           #arrCommit=($commit)
@@ -57,13 +55,13 @@ jobs:
           #msg=`echo $result | sed 's/.*Merge //' | cut -d " "`
           #arrMsg=($msg)
           #echo ${arrMsg[@]}
-          #echo "::set-output name=cmdResult::$result"
+          echo "::set-output name=cmdResult::$commits"
           #msg=`echo $result | grep -A 1 'Date:'`
           #echo "::set-output name=cmdResult::$result"
           #echo $msg
           
-      #- name: Show Result
-        #run: echo "${{steps.runCmd.outputs.cmdResult}}"
+      - name: Show Result
+        run: echo "${{steps.runCmd.outputs.cmdResult}}"
           
            
       

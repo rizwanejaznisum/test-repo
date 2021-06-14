@@ -40,7 +40,8 @@ jobs:
         id: runCmd
         uses: actions/checkout@v2
       - run: |
-          git fetch --unshallow --tags
+          #git fetch --unshallow --tags
+          git fetch
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           git log $tag1..$tag2 --reverse --merges

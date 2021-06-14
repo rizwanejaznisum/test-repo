@@ -63,6 +63,7 @@ jobs:
           #msg=`echo $result | grep -A 1 'Date:'`
           #echo "::set-output name=cmdResult::$result"
           #echo $msg
+          echo "${arr[@]/#/-H}" 
           
       - name: Show Result
         run: echo ${{steps.runCmd.outputs.cmdOutput}}          

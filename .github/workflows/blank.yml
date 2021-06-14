@@ -64,7 +64,6 @@ jobs:
           #echo $msg
           
       - name: Show Result
-        run: echo "${{steps.runCmd.outputs.cmdOutput}}"
-          
+        run: echo ${{steps.runCmd.outputs.cmdOutput}}          
            
       

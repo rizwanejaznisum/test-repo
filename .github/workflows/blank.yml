@@ -47,9 +47,9 @@ jobs:
           #echo $result
           commit=`echo $result | grep 'Merge:'`
           arr=($commit)
-          echo ${arr[@]}
+          #echo ${arr[@]}
           #echo "::set-output name=cmdResult::$result"
-          #echo $commit
+          echo $commit
           msg=`echo $result | grep -A 1 'Date:'`
           #echo "::set-output name=cmdResult::$result"
           #echo $msg

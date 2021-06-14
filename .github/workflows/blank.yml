@@ -46,9 +46,8 @@ jobs:
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log $tag2..$tag1 --reverse --merges`
          
-          arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'`)
+          arr=(`echo {"sha": "$result"} | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'`)
           echo ${arr[@]}
-          for i in "${arr[@]}" do: echo '{"sha": $i}' done
           echo "::set-output name=cmdOutput::$arr"
           #echo $commmits
           #sed 's/^.*Date //; s/commit.*$//' << $result

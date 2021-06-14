@@ -47,7 +47,7 @@ jobs:
           result=`git log $tag2..$tag1 --reverse --merges`
          
           #arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'`)
-          arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print "{\"sha\": \"" $(i+2) "\"}"}')
+          arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print "{\"sha\": \"" $(i+2) "\"}"}'`)
           echo ${arr[@]}
           echo "::set-output name=cmdOutput::$arr"
           #echo $commmits

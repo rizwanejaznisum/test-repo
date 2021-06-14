@@ -46,9 +46,9 @@ jobs:
           result=`git log $tag1..$tag2 --reverse --merges`
           #echo $result
           commit=`echo $result | grep 'Merge:'`
-          commit=`echo $result | sed 's/.*Merge: //' | cut -d " " -f 1`
+          echo $result | sed 's/.*Merge: //' | cut -d " " -f 1
           arr=($commit)
-          echo ${arr[@]}
+          #echo ${arr[@]}
           #echo "::set-output name=cmdResult::$result"
           msg=`echo $result | grep -A 1 'Date:'`
           #echo "::set-output name=cmdResult::$result"

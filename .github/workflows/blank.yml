@@ -45,6 +45,7 @@ jobs:
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           git log $tag1..$tag2 --reverse --merges
+          echo 'welcome'
           #result=`git log $tag1..$tag2 --reverse --merges`
           #echo $result
           echo $result | sed 's/.*Merge: //' | cut -d " " -f 2

@@ -49,7 +49,7 @@ jobs:
           arrCommit=($commit)
           echo ${arrCommit[@]}
           
-          echo $result | sed 's/.*Merge //' | cut -d " "
+          echo $result | sed 's/.*Merge //'
           #msg=`echo $result | sed 's/.*Merge //' | cut -d " "`
           #arrMsg=($msg)
           #echo ${arrMsg[@]}

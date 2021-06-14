@@ -45,10 +45,14 @@ jobs:
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log $tag1..$tag2 --reverse --merges`
           #echo $result
-          commit=`echo $result | grep 'Merge:'`
           commit=`echo $result | sed 's/.*Merge: //' | cut -d " " -f 2`
-          arr=($commit)
-          echo ${arr[@]}
+          arrCommit=($commit)
+          echo ${arrCommit[@]}
+          
+          echo $result | sed 's/.*Merge //' | cut -d " "
+          #msg=`echo $result | sed 's/.*Merge //' | cut -d " "`
+          #arrMsg=($msg)
+          #echo ${arrMsg[@]}
           #echo "::set-output name=cmdResult::$result"
           msg=`echo $result | grep -A 1 'Date:'`
           #echo "::set-output name=cmdResult::$result"

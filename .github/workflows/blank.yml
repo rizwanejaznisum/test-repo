@@ -46,7 +46,7 @@ jobs:
           result=`git log $tag1..$tag2 --reverse --merges`
           #echo $result
           commit=`echo $result | grep 'Merge:'`
-          echo $result | grep 'Merge:'
+          #echo $result | grep 'Merge:'
           arr=($commit)
           #echo ${arr[@]}
           #echo "::set-output name=cmdResult::$result"

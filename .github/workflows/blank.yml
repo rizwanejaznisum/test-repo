@@ -45,8 +45,8 @@ jobs:
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log $tag2..$tag1 --reverse --merges`
-          arra=($result)
-          echo ${arra[@]}
+          IFS="commit" read -a myarray <<< $result
+          echo ${myarray[@]}
           echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'
           #sed 's/^.*Date //; s/commit.*$//' << $result
           #commit=`echo $result | sed 's/.*Merge: //' | cut -d " " -f 2`

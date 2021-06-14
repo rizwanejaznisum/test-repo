@@ -48,7 +48,7 @@ jobs:
           commit=`echo $result | grep 'Merge:' | awk '{print $3}'`
           #echo "::set-output name=cmdResult::$result"
           echo $commit
-          msg=`echo sed -n 's/^Merge:[[:space:]]*//p' << $result `
+          msg=`sed -n 's/^Merge:[[:space:]]*//p' << $result `
           #echo "::set-output name=cmdResult::$result"
           echo $msg
           

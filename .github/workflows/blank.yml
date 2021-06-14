@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
-          tag1=`echo ${{steps.saveResponse.outputs.tag1}`
+          tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log $tag1..$tag2 --reverse --merges  --grep='Merge pull request'`
           echo "::set-output name=cmdResult::$result"
           

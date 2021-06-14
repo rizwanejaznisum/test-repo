@@ -45,8 +45,7 @@ jobs:
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log $tag2..$tag1 --reverse --merges`
-          readarray -t ADDR <<< "$result"
-          echo ${ADDR[@]} | grep 'Merge:'
+          echo result | grep -oP '(?<=Merge:\s/)\w+'
           #commit=`echo $result | sed 's/.*Merge: //' | cut -d " " -f 2`
           #arrCommit=($commit)
           #echo ${arrCommit[@]}

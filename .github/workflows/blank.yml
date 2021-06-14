@@ -48,6 +48,7 @@ jobs:
          
           arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'`)
           echo ${arr[@]}
+          echo "::set-output name=cmdOutput::$arr"
           #echo $commmits
           #sed 's/^.*Date //; s/commit.*$//' << $result
           #commit=`echo $result | sed 's/.*Merge: //' | cut -d " " -f 2`
@@ -63,7 +64,7 @@ jobs:
           #echo $msg
           
       - name: Show Result
-        run: echo "${{steps.runCmd.outputs.cmdResult}}"
+        run: echo "${{steps.runCmd.outputs.cmdOutput}}"
           
            
       

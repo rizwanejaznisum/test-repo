@@ -53,6 +53,6 @@ jobs:
           echo "::set-output name=result::$result"
           
       - name: Show Result
-        run: echo ${{steps.runCmd.outputs.result}}          
+        run: echo "${{steps.runCmd.outputs.result}}" 
            
       

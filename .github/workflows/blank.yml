@@ -45,29 +45,13 @@ jobs:
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log 9.0..10.0 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
-          echo $result | perl -pe 'BEGIN{print "{"}; END{print "}"}'
+          echo $result | perl -pe 'BEGIN{print "{\"owner\": \"Science37\", \"repo\": \"platform\", \"prDetails\":"}; END{print "}"}'
          
           #arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+1)}'`)
           arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print "{\"sha\": \"" $(i+1) "\"}"}'`)
           echo ${arr[@]}
           
-          arrMsg=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Msg:")print "{\"sha\": \"" $(i+1) "\"}"}'`)
-          echo ${arrMsg[@]}
-          #echo "::set-output name=cmdOutput::$arr"
-          #echo $commmits
-          #sed 's/^.*Date //; s/commit.*$//' << $result
-          #commit=`echo $result | sed 's/.*Merge: //' | cut -d " " -f 2`
-          #arrCommit=($commit)
-          #echo ${arrCommit[@]}
-          #echo $result | sed 's/.*Merge //'
-          #msg=`echo $result | sed 's/.*Merge //' | cut -d " "`
-          #arrMsg=($msg)
-          #echo ${arrMsg[@]}
-          echo "::set-output name=cmdResult::$commits"
-          #msg=`echo $result | grep -A 1 'Date:'`
-          #echo "::set-output name=cmdResult::$result"
-          #echo $msg
-          echo "${arr[@]/#/-H}" 
+          
           
       - name: Show Result
         run: echo ${{steps.runCmd.outputs.cmdOutput}}          

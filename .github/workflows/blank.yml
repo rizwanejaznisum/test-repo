@@ -50,9 +50,9 @@ jobs:
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log 9.0..10.0 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
           result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"prDetails\":"}; END{print "}"}'`
-          echo $result
+          echo "::set-output name=result::$result"
           
       - name: Show Result
-        run: echo ${{steps.runCmd.outputs.cmdOutput}}          
+        run: echo ${{steps.runCmd.outputs.result}}          
            
       

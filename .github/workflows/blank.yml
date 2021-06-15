@@ -44,12 +44,12 @@ jobs:
           git fetch
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
-          result=`git log 9.0..10.0 --reverse --merges --pretty=tformat:"%h %s%n"`
+          result=`git log 9.0..10.0 --reverse --merges --pretty=tformat:"Merge: %h Msg: %s%x24%x24%x24"`
           echo $result
          
-          #arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+2)}'`)
-          #arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print "{\"sha\": \"" $(i+2) "\"}"}'`)
-          #echo ${arr[@]}
+          #arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+1)}'`)
+          arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print "{\"sha\": \"" $(i+1) "\"}"}'`)
+          echo ${arr[@]}
           #echo "::set-output name=cmdOutput::$arr"
           #echo $commmits
           #sed 's/^.*Date //; s/commit.*$//' << $result

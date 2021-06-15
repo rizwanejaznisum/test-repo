@@ -51,7 +51,7 @@ jobs:
           #result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
           result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@`
           result=`echo $result | sed 's/.$//' | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
-          result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"tag\": \"replacetaghere\", \"prDetails\":"}; END{print "}"}'`
+          result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"releaseTag\": \"replacetaghere\", \"prDetails\":"}; END{print "}"}'`
           result=`echo ${result/replacetaghere/$tag1}`
           withQ=`echo $result | sed -e s/\"/\\\\\"/g`
           withQ=`echo \"$withQ\"`

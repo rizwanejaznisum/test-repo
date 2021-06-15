@@ -58,6 +58,8 @@ jobs:
           withQ=`echo \"$withQ\"`
           http_response=$(curl -o - -XPOST '${{env.URL}}' -H 'Content-Type: application/json' -d "${withQ}")
           echo $http_response > report.html
-          git status
+          git add report.html
+          git commit -m "new report"
+          git push origin
            
       

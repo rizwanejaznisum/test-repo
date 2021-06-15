@@ -38,7 +38,6 @@ jobs:
         run: |
          tag1=`echo '${{ steps.myRequest.outputs.response }}' | jq '.[0].tag_name'`
          tag2=`echo '${{ steps.myRequest.outputs.response }}' | jq '.[1].tag_name'`
-         if [ -z ${var+x} ]; then
          echo "::set-output name=tag1::$tag1"
          echo "::set-output name=tag2::$tag2"
          

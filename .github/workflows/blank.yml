@@ -52,8 +52,8 @@ jobs:
           result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"prDetails\":"}; END{print "}"}'`
           withQ=`echo $result | sed -e s/\"/\\\\\"/g`
           withQ=`echo \"$withQ\"`
-          curl --verbose -XPOST 'https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082' -H 'Content-Type: application/json' -d "${withQ}"
-          echo curl --verbose -XPOST 'https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082' -H 'Content-Type: application/json' -d "${withQ}"
+          curl --verbose -XPOST 'https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082' -H 'Content-Type: application/json' -d ${withQ}
+          echo curl --verbose -XPOST 'https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082' -H 'Content-Type: application/json' -d ${withQ}
           
       - name: Show Result
         run: echo "abc"

@@ -50,7 +50,8 @@ jobs:
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log 9.0..10.0 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
           result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"prDetails\":"}; END{print "}"}'`
-          curl -H "Content-Type: application/json" -d $result https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082
+          #curl -H "Content-Type: application/json" -d $result https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082
+          echo $result
           
       - name: Show Result
         run: echo "abc"

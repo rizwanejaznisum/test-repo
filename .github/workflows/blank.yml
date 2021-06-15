@@ -56,12 +56,12 @@ jobs:
           result=`echo ${result/replacetaghere/$tag1}`
           withQ=`echo $result | sed -e s/\"/\\\\\"/g`
           withQ=`echo \"$withQ\"`
-          http_response=$(curl -o - -XPOST '${{env.URL}}' -H 'Content-Type: application/json' -d "${withQ}")
-          echo $http_response > ./report.html
+          httpResponse=$(curl -o - -XPOST '${{env.URL}}' -H 'Content-Type: application/json' -d "${withQ}")
+          echo $httpResponse > ./report.html
       - uses: EndBug/add-and-commit@v7
         with:
            add: './report.html'
            author_name: GitHub action
-           message: “[GitHub-Action] Added report in the Repo”
+           message: "[GitHub-Action] Added report in the Repo"
            
       

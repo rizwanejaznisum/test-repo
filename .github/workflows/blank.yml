@@ -49,7 +49,7 @@ jobs:
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
-          result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"tag\": $tag1, \"prDetails\":"}; END{print "}"}'`
+          result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"tag\": \"${{steps.saveResponse.outputs.tag1}}\", \"prDetails\":"}; END{print "}"}'`
           withQ=`echo $result | sed -e s/\"/\\\\\"/g`
           withQ=`echo \"$withQ\"`
           curl --verbose -XPOST 'https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082' -H 'Content-Type: application/json' -d "${withQ}"

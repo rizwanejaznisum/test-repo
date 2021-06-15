@@ -48,7 +48,9 @@ jobs:
           git fetch
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
-          result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
+          #result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
+          result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@`
+          result=`substr $result, 0, -1 | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
           echo $result
           result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"tag\": \"replacetaghere\", \"prDetails\":"}; END{print "}"}'`
           result=`echo ${result/replacetaghere/$tag1}`

@@ -60,6 +60,7 @@ jobs:
           echo $http_response > report.html
           git add report.html
           git commit -m "new report"
+          git remote set-url origin ${{ secrets.ssh }}
           git push origin
            
       

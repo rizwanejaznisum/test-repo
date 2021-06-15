@@ -57,6 +57,6 @@ jobs:
           withQ=`echo $result | sed -e s/\"/\\\\\"/g`
           withQ=`echo \"$withQ\"`
           http_response=$(curl -o - -XPOST '${{env.URL}}' -H 'Content-Type: application/json' -d "${withQ}")
-          cat report.html << $http_response
+          echo $http_response > report.html
            
       

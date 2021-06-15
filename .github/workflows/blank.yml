@@ -52,7 +52,7 @@ jobs:
           result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"prDetails\":"}; END{print "}"}'`
           withQuotes=`echo \'$result\'`
           #echo $withQuotes
-          curl --verbose -H "Content-Type: application/json" -d $withQuotes "https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082"
+          curl --verbose -XPOST 'https://webhook.site/0358ecb3-1500-4d37-a439-93139f77c082' -H 'Content-Type: application/json' -d $withQuotes
           
       - name: Show Result
         run: echo "abc"

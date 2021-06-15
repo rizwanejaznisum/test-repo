@@ -45,7 +45,7 @@ jobs:
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           result=`git log 9.0..10.0 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
-          echo $result
+          echo $result | pearl -pe 'BEGIN{print "{"}; END{print "}"}
          
           #arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print $(i+1)}'`)
           arr=(`echo $result | awk -F'[ ]' '{for(i=1;i<=NF;i++)if($i=="Merge:")print "{\"sha\": \"" $(i+1) "\"}"}'`)

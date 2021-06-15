@@ -51,9 +51,8 @@ jobs:
           result=`git log 9.0..10.0 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
           result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"prDetails\":"}; END{print "}"}'`
           echo "::set-output name=result::$result"
-          echo "::set-output name=abc::'ddd'"
           
       - name: Show Result
-        run: echo ${{steps.runCmd.outputs.abc}}
+        run: echo "abc"
            
       

@@ -57,10 +57,11 @@ jobs:
           withQ=`echo $result | sed -e s/\"/\\\\\"/g`
           withQ=`echo \"$withQ\"`
           http_response=$(curl -o - -XPOST '${{env.URL}}' -H 'Content-Type: application/json' -d "${withQ}")
-          echo $http_response > report.html
-          git add report.html
-          git commit -m "new report"
-          git remote set-url origin ${{ secrets.ssh }}
-          git push origin
+          echo $http_response > ./report.html
+      - uses: EndBug/add-and-commit@v7
+        with:
+           add: './report.html'
+           author_name: GitHub action
+           message: “[GitHub-Action] Added report in the Repo”
            
       

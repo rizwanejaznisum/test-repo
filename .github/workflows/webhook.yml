@@ -2,8 +2,7 @@ name: webhook
 
 on:
   repository_dispatch:
-    types: 
-    - '*'
+    types: do-something
 
 jobs:
   build:

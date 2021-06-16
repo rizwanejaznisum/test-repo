@@ -17,21 +17,30 @@ jobs:
            fetch-depth: 0 
       - run: |
           git pull
-          git checkout -b ${{ github.event.client_payload.branch }}
-          git push origin ${{ github.event.client_payload.branch }}
-          git checkout main
     
       - name: Create Report
         run: |
           echo "${{ github.event.client_payload.text }}" > ./report2.html 
           cat ./report2.html
           
-      - name: github commit
-        uses: EndBug/add-and-commit@v7
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add ./report2.html
+          git commit -m "Add changes"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-           add: './report2.html'
-           author_name: GitHub action
-           message: "[GitHub-Action] Added report in the Repo"
-           branch: ${{ github.event.client_payload.branch }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.client_payload.branch }}
+          
+#       - name: github commit
+#         uses: EndBug/add-and-commit@v7
+#         with:
+#            add: './report2.html'
+#            author_name: GitHub action
+#            message: "[GitHub-Action] Added report in the Repo"
+#            branch: ${{ github.event.client_payload.branch }}
            
            

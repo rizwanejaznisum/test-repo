@@ -24,6 +24,11 @@ jobs:
         run: |
           echo "${{ github.event.client_payload.text }}" > ./report2.html 
           cat ./report2.html
+          
+      - name: github change
+        uses: actions/checkout@v2
+      - run: |
+          git checkout ${{ github.event.client_payload.branch }}
         
       - name: github commit
         uses: EndBug/add-and-commit@v7

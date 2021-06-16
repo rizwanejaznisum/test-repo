@@ -25,11 +25,9 @@ jobs:
           echo "${{ github.event.client_payload.text }}" > ./report2.html 
           cat ./report2.html
         
-      - name: github commit
-        uses: EndBug/add-and-commit@v7
-        with:
-           add: './report2.html'
-           author_name: GitHub action
-           message: "[GitHub-Action] Added report in the Repo"
-           branch: origin/${{ github.event.client_payload.branch }}
-           pull_strategy: '--no-ff'
+      - name: github push
+        uses: actions/checkout@v2
+      - run: |
+          git add ./report2.html
+          git commit -m "abc"
+          git push

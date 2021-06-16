@@ -13,9 +13,13 @@ jobs:
     
       - name: github pull
         uses: actions/checkout@v2
+        with:
+           fetch-depth: 0 
       - run: |
           git pull
-          git push origin origin:refs/heads/${{ github.event.client_payload.branch }}
+          git push checkout -b ${{ github.event.client_payload.branch }}
+          git push origin ${{ github.event.client_payload.branch }}
+          git checkout origin main
     
       - name: Create Report
         run: |

@@ -13,15 +13,12 @@ jobs:
     
       - name: github pull
         uses: actions/checkout@v2
-        with:
-           fetch-depth: 0 
       - run: |
           git pull
     
       - name: Create Report
         run: |
           echo "${{ github.event.client_payload.text }}" > ./report2.html 
-          cat ./report2.html
           
       - name: Commit files
         run: |
@@ -35,12 +32,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.event.client_payload.branch }}
           
-#       - name: github commit
-#         uses: EndBug/add-and-commit@v7
-#         with:
-#            add: './report2.html'
-#            author_name: GitHub action
-#            message: "[GitHub-Action] Added report in the Repo"
-#            branch: ${{ github.event.client_payload.branch }}
-           
            

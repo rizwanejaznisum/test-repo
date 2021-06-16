@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           git pull
+          git checkout -b ${{ github.event.client_payload.branch }}
     
       - name: Create Report
         run: |
@@ -27,4 +28,4 @@ jobs:
            add: './report2.html'
            author_name: GitHub action
            message: "[GitHub-Action] Added report in the Repo"
-           branch: created-branch
+           branch: ${{ github.event.client_payload.branch }}

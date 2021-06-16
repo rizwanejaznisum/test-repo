@@ -18,7 +18,7 @@ jobs:
           git pull origin main
           git checkout -b ${{ github.event.client_payload.branch }}
           git push origin ${{ github.event.client_payload.branch }}
-          git checkout ${{ github.event.client_payload.branch }}
+          git pull
     
       - name: Create Report
         run: |

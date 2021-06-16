@@ -16,6 +16,7 @@ jobs:
       - run: |
           git pull
           git checkout -b ${{ github.event.client_payload.branch }}
+          git push origin ${{ github.event.client_payload.branch }}
     
       - name: Create Report
         run: |

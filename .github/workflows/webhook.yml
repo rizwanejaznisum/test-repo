@@ -14,12 +14,11 @@ jobs:
       - name: github pull
         uses: actions/checkout@v2
       - run: |
-          git checkout main
-          git pull origin main
+          git pull
           git checkout -b ${{ github.event.client_payload.branch }}
           git push origin ${{ github.event.client_payload.branch }}
-          git pull
           git status
+          git branch --set-upstream-to=origin/${{ github.event.client_payload.branch }} ${{ github.event.client_payload.branch }}
     
       - name: Create Report
         run: |

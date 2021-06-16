@@ -15,7 +15,8 @@ jobs:
       run: |
         echo ${{ github.event.client_payload.text }} > ./report2.html 
         cat ./report2.html
-    
+        
+    - name: github-commit
     - uses: EndBug/add-and-commit@v7
       with:
          add: './report2.html'

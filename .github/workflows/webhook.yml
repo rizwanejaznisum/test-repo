@@ -14,8 +14,8 @@ jobs:
       - name: github pull
         uses: actions/checkout@v2
       - run: |
-          git checkout master
-          git pull origin master
+          git checkout main
+          git pull origin main
           git checkout -b ${{ github.event.client_payload.branch }}
           git push origin ${{ github.event.client_payload.branch }}
     

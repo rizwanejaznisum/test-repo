@@ -30,3 +30,4 @@ jobs:
            add: './report2.html'
            author_name: GitHub action
            message: "[GitHub-Action] Added report in the Repo"
+           branch: origin/${{ github.event.client_payload.branch }}

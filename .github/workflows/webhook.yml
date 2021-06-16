@@ -13,7 +13,7 @@ jobs:
     
       - name: Create Report
         run: |
-          echo ${{ github.event.client_payload.text }} > ./report2.html 
+          echo \"${{ github.event.client_payload.text }}\" > ./report2.html 
           cat ./report2.html
           
       - name: github pull

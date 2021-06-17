@@ -30,8 +30,10 @@ jobs:
           if [[ -z ${existed_in_remote} ]]; then
             echo 0
           else
+            git stash
             git checkout origin/${{ github.event.client_payload.branch }}
             git pull
+            git stash pop
             
           fi
           git add ./report2.html

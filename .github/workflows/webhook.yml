@@ -20,7 +20,7 @@ jobs:
             echo 0
           else
             git checkout origin/${{ github.event.client_payload.branch }}
-            git pull
+            git pull ${{ github.event.client_payload.branch }}
           fi
     
       - name: Create Report

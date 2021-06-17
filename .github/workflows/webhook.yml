@@ -26,9 +26,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           echo "check here"
           exists=`git show-ref refs/heads/${{ github.event.client_payload.branch }}`
-          if [ -n "$exists" ]; then
-            echo 'branch exists!'
-          fi
+          if (git ls-remote --heads origin ${{ github.event.client_payload.branch }) { echo 'exists' } else { echo 'not exists' }
           git add ./report2.html
           git commit -m "Add changes"
       - name: Push changes

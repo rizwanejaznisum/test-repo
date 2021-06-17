@@ -30,7 +30,7 @@ jobs:
           if [[ -z ${existed_in_remote} ]]; then
             echo 0
           else
-            git pull ${{ github.event.client_payload.branch }}
+            git pull origin/${{ github.event.client_payload.branch }}
             git checkout ${{ github.event.client_payload.branch }}
           fi
           git add ./report2.html

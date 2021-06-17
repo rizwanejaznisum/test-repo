@@ -19,8 +19,9 @@ jobs:
           if [[ -z ${existed_in_remote} ]]; then
             echo 0
           else
+            git fetch
             git checkout ${{ github.event.client_payload.branch }}
-            git pull ${{ github.event.client_payload.branch }}
+            git pull
           fi
     
       - name: Create Report

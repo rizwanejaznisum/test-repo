@@ -51,7 +51,7 @@ jobs:
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
           
           branch=$(git branch -a --contains tags/$tag1)
-          VAR=`echo $branch | awk '{print $NF}'`
+          VAR=`echo $branch | awk '{print $NF}' | awk -F "[/]" '{print $NF}'`
           
           result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@`
           result=`echo $result | sed 's/.$//' | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`

@@ -2,6 +2,11 @@ name: webhook
 
 on:
    workflow_dispatch:
+     inputs:
+       branch:
+         required: true
+       text:
+         required: true
 
 jobs:
   build:
@@ -14,18 +19,18 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           git pull
-          existed_in_remote=$(git ls-remote --heads origin ${{ github.event.client_payload.branch }})
+          existed_in_remote=$(git ls-remote --heads origin ${{ github.event.inputs.branch }})
           if [[ -z ${existed_in_remote} ]]; then
             echo 0
           else
             git fetch
-            git checkout ${{ github.event.client_payload.branch }}
+            git checkout ${{ github.event.inputs.branch }}
             git pull
           fi
     
       - name: Create Report
         run: |
-          echo "${{ github.event.client_payload.text }}" > ./report2.html 
+          echo "${{ github.event.inputs.text }}" > ./report2.html 
           
       - name: Commit files
         run: |
@@ -37,6 +42,6 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.event.client_payload.branch }}
+          branch: ${{ github.event.inputs.branch }}
           
            

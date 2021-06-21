@@ -61,7 +61,7 @@ jobs:
           result=`echo ${result/replacebranchhere/$VAR}`
           withQ=`echo $result | sed -e s/\"/\\\\\"/g`
           withQ=`echo \"$withQ\"`
-          echo withQ
+          echo $withQ
           #httpResponse=$(curl -o - -XPOST '${{env.URL}}' -H 'Content-Type: application/json' -d "${withQ}")
           #echo $httpResponse > ./report.html
       #- uses: EndBug/add-and-commit@v7

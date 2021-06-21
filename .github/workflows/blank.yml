@@ -49,19 +49,25 @@ jobs:
           git fetch
           tag1=`echo ${{steps.saveResponse.outputs.tag1}}`
           tag2=`echo ${{steps.saveResponse.outputs.tag2}}`
-          #result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@ | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
+          
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw/origin\/}
+          VAR=`echo $branch | awk '{print $NF}'`
+          
           result=`git log $tag2..$tag1 --reverse --merges --pretty=tformat:"{\"sha\": \"%h\", \"label\": \"%s\"},%n" $@`
           result=`echo $result | sed 's/.$//' | perl -pe 'BEGIN{print "["}; END{print "]\n"}' | perl -pe 's/},]/}]/'`
-          result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"releaseTag\": \"replacetaghere\", \"prDetails\":"}; END{print "}"}'`
+          result=`echo $result | perl -pe 'BEGIN{print "{\"owner\": \"${{env.OWNER}}\", \"repo\": \"${{env.REPO}}\", \"releaseTag\": \"replacetaghere\", \"branch\": \"replacebranchhere\", \"prDetails\":"}; END{print "}"}'`
           result=`echo ${result/replacetaghere/$tag1}`
+          result=`echo ${result/replacebranchhere/$VAR}`
           withQ=`echo $result | sed -e s/\"/\\\\\"/g`
           withQ=`echo \"$withQ\"`
-          httpResponse=$(curl -o - -XPOST '${{env.URL}}' -H 'Content-Type: application/json' -d "${withQ}")
-          echo $httpResponse > ./report.html
-      - uses: EndBug/add-and-commit@v7
-        with:
-           add: './report.html'
-           author_name: GitHub action
-           message: "[GitHub-Action] Added report in the Repo"
+          echo withQ
+          #httpResponse=$(curl -o - -XPOST '${{env.URL}}' -H 'Content-Type: application/json' -d "${withQ}")
+          #echo $httpResponse > ./report.html
+      #- uses: EndBug/add-and-commit@v7
+        #with:
+           #add: './report.html'
+           #author_name: GitHub action
+           #message: "[GitHub-Action] Added report in the Repo"
            
       

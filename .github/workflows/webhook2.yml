@@ -1,0 +1,36 @@
+name: webhook2
+
+on:
+  push:
+  
+#    workflow_dispatch:
+#      inputs:
+#        branch:
+#          required: true
+#        text:
+#          required: true
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - name: github pull
+        uses: actions/checkout@v2
+      - run: |
+          git pull
+          existed_in_remote=$(git ls-remote --heads origin ${{ github.event.inputs.branch }})
+          if [[ -z ${existed_in_remote} ]]; then
+            echo 0
+          else
+            git fetch
+            git checkout ${{ github.event.inputs.branch }}
+            git pull
+          fi
+    
+      - name: Create Report
+        run: |
+          echo "${{ github.event.inputs.text }}"
+

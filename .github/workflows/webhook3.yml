@@ -1,12 +1,14 @@
 name: webhook2
 
 on:
-   workflow_dispatch:
-     inputs:
-       branch:
-         required: true
-       text:
-         required: true
+  push:
+  
+#    workflow_dispatch:
+#      inputs:
+#        branch:
+#          required: true
+#        text:
+#          required: true
 
 jobs:
   build:

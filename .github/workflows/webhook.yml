@@ -1,8 +1,7 @@
 name: webhook
 
 on:
-  repository_dispatch:
-    types: do-something
+   workflow_dispatch:
 
 jobs:
   build:

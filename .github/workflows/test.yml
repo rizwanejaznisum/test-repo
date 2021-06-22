@@ -20,6 +20,7 @@ jobs:
       - run: |
           git pull
           echo "tags......."
-          git branch -r --contains tags/19.0 --sort=-committerdate
+          #git branch -r --contains tags/19.0 --sort=-committerdate
+          git name-rev --name-only --exclude=tags/* 5c7172daf4b361b75220ee566a063c6a53d1a819
           
            

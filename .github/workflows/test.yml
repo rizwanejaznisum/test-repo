@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           git pull
+          echo "tags......."
           git branch -r --contains tags/19.0 --sort=-committerdate
           
            
